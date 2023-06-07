@@ -22,7 +22,7 @@ import { Box } from "./App.styled";
       id: nanoid(), 
     }
       
-    if (this.chekName(newContact.name)) {
+    if (this.chekName(newContact.name) || this.chekNumber(newContact.number)) {
       Notify.failure(`${newContact.name} is already in contacts`, Notify.init({
         clickToClose: true,
         position: 'center-top',
@@ -40,7 +40,11 @@ import { Box } from "./App.styled";
 
     chekName = newName => {
       // console.log(this.state)
-      return this.state.contacts.find(({ name }) => name === newName);
+      return this.state.contacts.find(({ name }) => name.toLowerCase() === newName.toLowerCase());
+    };
+    chekNumber = newNumber => {
+      // console.log(this.state)
+      return this.state.contacts.find(({ number }) => number === newNumber);
     };
 
     changeFilter = event => {
